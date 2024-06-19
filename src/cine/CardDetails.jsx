@@ -8,16 +8,15 @@ import Checkout from "../assets/icons/checkout.svg";
 
 export default function CardDetails({onClose}) {
 
-  const {cardData,setCardData}= useContext(MovieContext)
+  const {state,dispatch}= useContext(MovieContext)
   
-  function handleDeleteCart(e,itemId){
+  function handleDeleteCart(e,item){
     e.preventDefault();
-
-    const filterdItem = cardData.filter((item)=>{
-      return item.id!== itemId
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      payload: item
     })
-
-    setCardData([...filterdItem])
+   
 
   }
 
@@ -36,8 +35,8 @@ export default function CardDetails({onClose}) {
         <div
           className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
         >
-          { cardData.length === 0 ? (<p className=" text-3xl">Your card is empty</p>): (
-            cardData.map(item =>(
+          {  state.cartData.length === 0 ? (<p className=" text-3xl">Your card is empty</p>): (
+            state.cartData.map(item =>(
               <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
               <div className="flex items-center gap-4">
                 <img
@@ -58,7 +57,7 @@ export default function CardDetails({onClose}) {
               <div className="flex justify-between gap-4 items-center">
                 <button
                   className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                  onClick={(e)=>handleDeleteCart(e,item.id)}
+                  onClick={(e)=>handleDeleteCart(e,item)}
                 >
                   <img className="w-5 h-5" src={Delete} alt="delete" />
                   <span className="max-md:hidden">Remove</span>

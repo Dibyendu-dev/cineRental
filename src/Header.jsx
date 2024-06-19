@@ -9,7 +9,7 @@ import { MovieContext , ThemeContext } from "./context";
 
 export default function Header() {
   const [showCard, setShowCard] = useState(false);
-  const { cardData } = useContext(MovieContext);
+  const { state } = useContext(MovieContext);
   const {darkMode,setDarkMode} = useContext(ThemeContext);
 
   function handleCradShow() {
@@ -54,11 +54,11 @@ export default function Header() {
                   height="24"
                   alt="ShoppingCart"
                 />
-                {cardData.length > 0 && (
-                  <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
-                    {cardData.length}
-                  </span>
-                )}
+                {state.cartData.length > 0 && (
+                                <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
+                                    {state.cartData.length}
+                                </span>
+                            )}
               </a>
             </li>
           </ul>
