@@ -1,27 +1,21 @@
 
 import { useState } from 'react'
 import './App.css'
-import Footer from './Footer'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import MovieList from './cine/MovieList'
-import { MovieContext } from './context'
+import Page from './Page' 
+
+import { MovieContext ,ThemeContext } from './context'
 
 function App() {
 
   const [cardData, setCardData] = useState([])
+  const [darkMode, setDarkMode]= useState(true)
   return (
     <>
+    <ThemeContext.Provider value={{darkMode, setDarkMode}}>
     <MovieContext.Provider value={{cardData,setCardData}}>
-    <Header/>
-    <main>
-		<div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-      <Sidebar/>
-      <MovieList/>
-    </div>
-    </main>
-    <Footer/>
+      <Page/>
     </MovieContext.Provider>
+    </ThemeContext.Provider>
     </>
   )
 }
