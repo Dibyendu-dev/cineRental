@@ -3,7 +3,7 @@ import { MovieContext } from "../context"
 import { getImageUrl } from "../utils/cine-utility"
 import Delete from '../assets/delete.svg'
 import Checkout from "../assets/icons/checkout.svg";
-
+import { toast } from "react-toastify";
 
 
 export default function CardDetails({onClose}) {
@@ -16,7 +16,16 @@ export default function CardDetails({onClose}) {
       type: 'REMOVE_FROM_CART',
       payload: item
     })
-   
+    toast.success(`Removed ${item.title} from the Cart !`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
 
   }
 
